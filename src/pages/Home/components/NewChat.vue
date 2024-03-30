@@ -139,7 +139,7 @@ const previewSpeech = () => {
       <input v-model="desc" type="text" />
     </div>
     <div class="flex ml-[-30px]">
-      <label for=""> the role </label>
+      <label for="">background </label>
       <textarea v-model="presets" :rows="4" placeholder="system prompt..." />
     </div>
     <div flex>
