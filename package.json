@@ -1,11 +1,11 @@
 {
-  "name": "polyglot",
+  "name": "Molly Talk",
   "version": "0.3.5",
   "private": true,
   "description": "Spoken language generation based on OpenAI",
-  "author": "Liou666 <liou666@126.com>",
+  "author": "Viviane<viviane>",
   "license": "MIT",
-  "repository": "https://github.com/liou666/polyglot",
+  "repository": "https://github.com/vivianehuang2022/mollytalk",
   "keywords": [
     "ChatGPT",
     "AI",

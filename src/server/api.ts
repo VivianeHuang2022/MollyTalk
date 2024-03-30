@@ -1,28 +1,28 @@
-import Api2d from 'api2d'
-import { OpenAi } from '@/utils'
-import useGlobalSetting from '@/hooks/useGlobalSetting'
+import Api2d from "api2d";
+import { OpenAi } from "@/utils";
+import useGlobalSetting from "@/hooks/useGlobalSetting";
 
-const { openProxy, openModel, openKey, openMaxTokens } = useGlobalSetting()
+const { openProxy, openModel, openKey, openMaxTokens } = useGlobalSetting();
 
-const timeout = 1000 * 25 // 25s
+const timeout = 1000 * 25; // 25s
 
 export const generateText = async (messages: ChatMessage[]) => {
-  const api = new Api2d(openKey.value, openProxy.value)
+  const api = new Api2d(openKey.value, openProxy.value);
 
   // timeout临时方案 https://github.com/easychen/api2d-js/pull/4
   const timer = setTimeout(() => {
-    api.abort()
-    clearTimeout(timer)
-  }, timeout)
+    api.abort();
+    clearTimeout(timer);
+  }, timeout);
   const completion = await api.completion({
     model: openModel.value,
     messages,
     stream: false,
     max_tokens: +openMaxTokens.value,
-  })
-  clearTimeout(timer)
-  return completion
-}
+  });
+  clearTimeout(timer);
+  return completion;
+};
 
 // 获取openapi余额接口已失效
 // export const generateDashboardInfo = async (apiKey: string, proxy?: string) => {
@@ -40,51 +40,53 @@ export const generateText = async (messages: ChatMessage[]) => {
 // }
 
 export const generatTranslate = async (text: string) => {
-  const api = new Api2d(openKey.value, openProxy.value)
+  const api = new Api2d(openKey.value, openProxy.value);
   const timer = setTimeout(() => {
-    api.abort()
-    clearTimeout(timer)
-    throw new Error('timeout')
-  }, timeout)
+    api.abort();
+    clearTimeout(timer);
+    throw new Error("timeout");
+  }, timeout);
 
-  const system = 'You are a translation engine that can only translate text and cannot interpret it, ensuring that the translation is clear, concise, and coherent.'
-  const assistantPrompt = `Please translate the following text into Chinese Simplified: ${text}`
+  const system =
+    "You are a translation engine that can only translate text and cannot interpret it, ensuring that the translation is clear, concise, and coherent.";
+  const assistantPrompt = `Please only translate the following text into English, if it is the english text, remain the same: ${text}`;
   const completion = await api.completion({
-    model: 'gpt-3.5-turbo',
+    model: "gpt-3.5-turbo",
     messages: [
-      { role: 'system', content: system },
-      { role: 'user', content: assistantPrompt },
+      { role: "system", content: system },
+      { role: "user", content: assistantPrompt },
     ],
     temperature: 1,
     n: 1,
     stream: false,
-  })
-  console.log(completion)
-  clearTimeout(timer)
-  return completion as any
-}
+  });
+  console.log(completion);
+  clearTimeout(timer);
+  return completion as any;
+};
 
 export const generatAnalysis = async (text: string) => {
-  const api = new Api2d(openKey.value, openProxy.value)
+  const api = new Api2d(openKey.value, openProxy.value);
   const timer = setTimeout(() => {
-    api.abort()
-    clearTimeout(timer)
-    throw new Error('timeout')
-  }, timeout)
+    api.abort();
+    clearTimeout(timer);
+    throw new Error("timeout");
+  }, timeout);
 
-  const system = '我想让gpt扮演我的语法老师，不论我说什么语言你都需要用中文纠正我语法的错误，如果语法没有错误，则回复\'无语法错误\''
-  const assistantPrompt = `'${text}'`
+  const system =
+    "I want GPT to play the role of my grammar teacher. No matter what language I use, you need to correct my grammar mistakes and write down the right sentence, and use english to explain the grammer mistakes. If there are no grammar mistakes, please reply 'No grammar mistakes'.";
+  const assistantPrompt = `'${text}'`;
   const completion = await api.completion({
-    model: 'gpt-3.5-turbo',
+    model: "gpt-3.5-turbo",
     messages: [
-      { role: 'system', content: system },
-      { role: 'user', content: assistantPrompt },
+      { role: "system", content: system },
+      { role: "user", content: assistantPrompt },
     ],
     temperature: 1,
     n: 1,
     stream: false,
-  })
-  console.log(completion)
-  clearTimeout(timer)
-  return completion as any
-}
+  });
+  console.log(completion);
+  clearTimeout(timer);
+  return completion as any;
+};

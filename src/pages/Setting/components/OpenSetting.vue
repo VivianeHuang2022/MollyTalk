@@ -1,9 +1,17 @@
 <script setup lang="ts">
-import Avatar from '@/components/Avatar.vue'
+import Avatar from "@/components/Avatar.vue";
 
-import { openaiModels } from '@/config'
+import { openaiModels } from "@/config";
 
-const { openKey, openProxy, openModel, chatApiName, chatRememberCount, selfAvatar, openMaxTokens } = useGlobalSetting()
+const {
+  openKey,
+  openProxy,
+  openModel,
+  chatApiName,
+  chatRememberCount,
+  selfAvatar,
+  openMaxTokens,
+} = useGlobalSetting();
 </script>
 
 <template>
@@ -21,12 +29,8 @@ const { openKey, openProxy, openModel, chatApiName, chatRememberCount, selfAvata
             <i icon-btn i-carbon:information-square />
           </el-tooltip>
         </div>
-        <select
-          v-model="chatApiName"
-        >
-          <option value="openAI">
-            openAI
-          </option>
+        <select v-model="chatApiName">
+          <option value="openAI">openAI</option>
         </select>
       </div>
 
@@ -48,17 +52,11 @@ const { openKey, openProxy, openModel, chatApiName, chatRememberCount, selfAvata
         <div center-y>
           <label mr-1 for="">OpenAI API 代理地址</label>
         </div>
-        <input
-          v-model="openProxy"
-          placeholder="https://api.openai.com"
-        >
+        <input v-model="openProxy" placeholder="https://api.openai.com" />
       </div>
       <div class="section-item">
         <label my-1 for="">OpenAI 模型</label>
-        <select
-          v-model="openModel"
-          placeholder="sk-xxxxxxxxxx"
-        >
+        <select v-model="openModel" placeholder="sk-xxxxxxxxxx">
           <option v-for="item in openaiModels" :key="item" :value="item">
             {{ item }}
           </option>
@@ -67,7 +65,9 @@ const { openKey, openProxy, openModel, chatApiName, chatRememberCount, selfAvata
     </section>
 
     <section class="main-section">
-      <div class="m-2 p2 border-0 border-gray-500/20 border-b-1 border-style-solid">
+      <div
+        class="m-2 p2 border-0 border-gray-500/20 border-b-1 border-style-solid"
+      >
         <div center-y>
           <label mr-1 my-1 for="">联系上下文次数</label>
           <el-tooltip
@@ -82,7 +82,13 @@ const { openKey, openProxy, openModel, chatApiName, chatRememberCount, selfAvata
           </span>
         </div>
         <div>
-          <input v-model="chatRememberCount" class="w-full! " min="1" max="50" type="range">
+          <input
+            v-model="chatRememberCount"
+            class="w-full!"
+            min="1"
+            max="50"
+            type="range"
+          />
         </div>
       </div>
       <div m-2 p2>
@@ -100,7 +106,14 @@ const { openKey, openProxy, openModel, chatApiName, chatRememberCount, selfAvata
           </span>
         </div>
         <div>
-          <input v-model="openMaxTokens" class="w-full! " step="10" min="50" max="4096" type="range">
+          <input
+            v-model="openMaxTokens"
+            class="w-full!"
+            step="10"
+            min="50"
+            max="4096"
+            type="range"
+          />
         </div>
       </div>
     </section>
@@ -126,18 +139,16 @@ const { openKey, openProxy, openModel, chatApiName, chatRememberCount, selfAvata
 </template>
 
 <style scoped>
-  .main-section{
-   @apply bg-gray-500/10 rounded
-  }
-  .main-section .section-item{
-    @apply rounded center-y justify-between m-2 p2 border-0 border-gray-500/20 border-b-1 border-style-solid
-  }
-  .main-section input {
-   @apply w-180px py-1 px-2  box-border rounded border-gray-500 border-1 block
-  }
-  .main-section select {
-    @apply w-180px py-1 px-2 select-settings
-
-  }
+.main-section {
+  @apply bg-gray-500/10 rounded;
+}
+.main-section .section-item {
+  @apply rounded center-y justify-between m-2 p2 border-0 border-gray-500/20 border-b-1 border-style-solid;
+}
+.main-section input {
+  @apply w-180px py-1 px-2  box-border rounded border-gray-500 border-1 block;
+}
+.main-section select {
+  @apply w-180px py-1 px-2 select-settings;
+}
 </style>
-
